@@ -1,7 +1,7 @@
 import { useState, useEffect, useRef } from "react";
 import "./style.css";
-
-/* ─── SVG COMPONENTS ─── */
+import Contact from "./Contact.jsx";
+import Countdown from "./Countdown.jsx";
 const BottleSVG = ({ stroke = "#1b2d5b", width = 22 }) => (
   <svg
     viewBox="0 0 48 100"
@@ -59,160 +59,9 @@ function Nav() {
       <div className="nav__links">
         <a href="#problem" className="nav__link">The Problem</a>
         <a href="#solution" className="nav__link">Solution</a>
-        <a href="#contact-form" className="nav__cta">Get Free Plan</a>
+        <a href="#contact-form" className="nav__cta">Contact Us</a>
       </div>
     </nav>
-  );
-}
-
-/* ─── HERO FORM ─── */
-function HeroForm({ loaded }) {
-  const [form, setForm] = useState({
-    firstName: "",
-    lastName: "",
-    storeName: "",
-    email: "",
-    preferredContact: "",
-    notes: "",
-  });
-  const [submitted, setSubmitted] = useState(false);
-  const [sending, setSending] = useState(false);
-  const [error, setError] = useState(false);
-
-  const update = (k) => (e) => setForm((f) => ({ ...f, [k]: e.target.value }));
-
-  const SHEET_URL = "https://script.google.com/a/macros/jupiter-pay.com/s/AKfycbxkkyuI9S78ARLBDRMrR-8LTPBJq0IW0kw-wuYbP21DbPy8y3Yw16XUhX_On0_dWJ8Gqw/exec";
-
-  const handleSubmit = async () => {
-    if (!form.firstName || !form.lastName || !form.storeName || !form.email || !form.preferredContact) {
-      alert("Please fill in all required fields.");
-      return;
-    }
-
-    setSending(true);
-    setError(false);
-
-    try {
-      await fetch(SHEET_URL, {
-        method: "POST",
-        mode: "no-cors",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(form),
-      });
-      setSubmitted(true);
-    } catch (err) {
-      setError(true);
-    } finally {
-      setSending(false);
-    }
-  };
-
-  return (
-    <div className={`form-panel${loaded ? " form-panel--loaded" : ""}`}>
-      <div className="form-panel__header">
-        <p className="form-panel__tagline">Free Transition Plan</p>
-        <h2 className="form-panel__title">
-          Get your plan<br /><em>today.</em>
-        </h2>
-      </div>
-
-      {submitted ? (
-        <div className="form-panel__success">
-          <div className="form-panel__success-icon">✅</div>
-          <h3>You're All Set!</h3>
-          <p>A POS specialist will reach out within one business day via your preferred method.</p>
-        </div>
-      ) : (
-        <div className="form-panel__body">
-
-          <div className="field-row">
-            <div className="field">
-              <label className="field__label">First Name</label>
-              <input
-                className="field__input"
-                type="text"
-                placeholder="Jane"
-                value={form.firstName}
-                onChange={update("firstName")}
-              />
-            </div>
-            <div className="field">
-              <label className="field__label">Last Name</label>
-              <input
-                className="field__input"
-                type="text"
-                placeholder="Smith"
-                value={form.lastName}
-                onChange={update("lastName")}
-              />
-            </div>
-          </div>
-
-          <div className="field">
-            <label className="field__label">Store Name</label>
-            <input
-              className="field__input"
-              type="text"
-              placeholder="Main Street Liquors"
-              value={form.storeName}
-              onChange={update("storeName")}
-            />
-          </div>
-
-          <div className="field">
-            <label className="field__label">Email Address</label>
-            <input
-              className="field__input"
-              type="email"
-              placeholder="you@yourstore.com"
-              value={form.email}
-              onChange={update("email")}
-            />
-          </div>
-
-          <div className="field">
-            <label className="field__label">Preferred Contact Method</label>
-            <select
-              className="field__input field__input--select"
-              value={form.preferredContact}
-              onChange={update("preferredContact")}
-            >
-              <option value="" disabled>Select one…</option>
-              <option value="Phone Call">Phone Call</option>
-              <option value="Text Message">Text Message</option>
-              <option value="Email">Email</option>
-              <option value="Any">Any — whatever's fastest</option>
-            </select>
-          </div>
-
-          <div className="field">
-            <label className="field__label">Notes <span style={{ opacity: 0.5 }}>(optional)</span></label>
-            <textarea
-              className="field__input field__input--textarea"
-              placeholder="Anything we should know about your current setup…"
-              rows={3}
-              value={form.notes}
-              onChange={update("notes")}
-            />
-          </div>
-
-          {error && (
-            <p style={{ color: "#f87171", fontSize: "0.8rem", textAlign: "center" }}>
-              Something went wrong. Please try again.
-            </p>
-          )}
-
-          <button
-            className={`form-panel__submit${sending ? " form-panel__submit--sending" : ""}`}
-            onClick={handleSubmit}
-            disabled={sending}
-          >
-            {sending ? "Sending…" : "Get My Free Transition Plan →"}
-          </button>
-          <p className="form-panel__note">No commitment. No pressure. Just clarity.</p>
-        </div>
-      )}
-    </div>
   );
 }
 
@@ -220,6 +69,22 @@ function HeroForm({ loaded }) {
 function Hero({ loaded }) {
   return (
     <section className="hero">
+
+      {/* Liquid gradient background */}
+      <div style={{ position:"absolute", inset:0, overflow:"hidden" }}>
+        <div style={{
+          position:"absolute", inset:0,
+          background:"linear-gradient(135deg,#061428 0%,#0a2240 25%,#0d3060 50%,#0a2240 75%,#061428 100%)",
+          backgroundSize:"300% 300%",
+          animation:"liquidShift 12s ease infinite",
+        }} />
+        <div style={{ position:"absolute", width:520, height:520, left:-100, top:-150, borderRadius:"50%", background:"radial-gradient(circle,#1a6eb5 0%,#0a3a6e 50%,transparent 70%)", filter:"blur(70px)", opacity:.55, mixBlendMode:"screen", animation:"blob1 14s ease-in-out infinite" }} />
+        <div style={{ position:"absolute", width:440, height:440, right:-80, bottom:-100, borderRadius:"50%", background:"radial-gradient(circle,#0e9a8a 0%,#064f4a 50%,transparent 70%)", filter:"blur(70px)", opacity:.55, mixBlendMode:"screen", animation:"blob2 17s ease-in-out infinite" }} />
+        <div style={{ position:"absolute", width:380, height:380, left:"40%", top:"20%", borderRadius:"50%", background:"radial-gradient(circle,#1451a8 0%,#0a2860 50%,transparent 70%)", filter:"blur(60px)", opacity:.5, mixBlendMode:"screen", animation:"blob3 11s ease-in-out infinite" }} />
+        <div style={{ position:"absolute", width:320, height:320, left:"20%", bottom:-50, borderRadius:"50%", background:"radial-gradient(circle,#0b7bbf 0%,#063a5c 50%,transparent 70%)", filter:"blur(60px)", opacity:.38, mixBlendMode:"screen", animation:"blob2 19s ease-in-out infinite reverse" }} />
+      </div>
+
+      {/* Content */}
       <div className={`hero__content${loaded ? " hero__content--loaded" : ""}`}>
         <p className={`hero__eyebrow${loaded ? " hero__eyebrow--loaded" : ""}`}>
           <span className="hero__eyebrow-dot" />
@@ -240,18 +105,19 @@ function Hero({ loaded }) {
           </span>
         </h1>
 
+        <Countdown />
+
         <p className={`hero__sub${loaded ? " hero__sub--loaded" : ""}`}>
           If your current POS is losing support or limiting your growth, now is the time to move. We help liquor stores switch systems with zero downtime and no data loss.
         </p>
 
         <a href="#contact-form" className="btn btn--primary">
-          Check If You Qualify →
+          Contact us
         </a>
       </div>
     </section>
   );
 }
-
 /* ─── TICKER ─── */
 function Ticker() {
   const items = [
@@ -332,13 +198,6 @@ function Solution() {
     { n: "04", title: "Ongoing support from a real team", desc: "Not a chatbot. Not a ticket queue. Real people who understand liquor store operations." },
   ];
 
-  const mockRows = [
-    ["Inventory records", "✓ 14,832 items"],
-    ["Customer data", "✓ Preserved"],
-    ["Register terminals", "✓ Unlimited"],
-    ["Downtime during switch", "✓ 0 minutes"],
-  ];
-
   return (
     <section id="solution" className="section section--alt">
       <div className="container">
@@ -370,139 +229,13 @@ function Solution() {
             })}
           </div>
 
-          <div ref={mockRef} className={`mockup scale-up${mockVis ? " vis" : ""}`}>
-            <div className="mockup__top">
-              <span className="mockup__status-label">System Status</span>
-              <span className="mockup__live">
-                <span className="live-dot" />
-                Live
-              </span>
-            </div>
-            <div className="mockup__title">Migration Complete</div>
-            <div className="mockup__sub">Store transitioned — zero downtime</div>
-            <div className="mockup__rows">
-              {mockRows.map(([label, val], i) => (
-                <div key={i} className="mockup__row">
-                  <span>{label}</span>
-                  <span className="mockup__row-val">{val}</span>
-                </div>
-              ))}
-            </div>
-            <span className="mockup__badge">Ready to Expand</span>
-          </div>
+
         </div>
       </div>
     </section>
   );
 }
 
-/* ─── TRUST ─── */
-function Trust() {
-  const [headRef, headVis] = useReveal();
-  const [subRef, subVis] = useReveal();
-
-  const stats = [
-    { n: "0",    l: "Minutes downtime in managed migrations" },
-    { n: "48h",  l: "Average time from sign-off to full go-live" },
-    { n: "100%", l: "Of stores kept their full inventory data" },
-    { n: "∞",    l: "Registers and locations you can add" },
-  ];
-
-  return (
-    <section id="trust" className="section section--navy">
-      <div className="container">
-        <div className="trust__grid">
-          <div className="trust__copy">
-            <h2 ref={headRef} className={`trust__headline rev${headVis ? " vis" : ""}`}>
-              Trusted by operators<br />making the <em>smart</em> move.
-            </h2>
-            <p ref={subRef} className={`trust__sub rev${subVis ? " vis" : ""}`}>
-              Already working with liquor store owners across the country. When your current system leaves you behind, we make sure the next chapter is better.
-            </p>
-          </div>
-
-          <div className="trust__stats">
-            {stats.map((s, i) => {
-              const [ref, vis] = useReveal();
-              return (
-                <div
-                  key={i}
-                  ref={ref}
-                  className={`stat-card rev${vis ? " vis" : ""}`}
-                  style={{ transitionDelay: `${i * 0.1}s` }}
-                >
-                  <div className="stat-card__num">{s.n}</div>
-                  <div className="stat-card__label">{s.l}</div>
-                </div>
-              );
-            })}
-          </div>
-        </div>
-      </div>
-    </section>
-  );
-}
-
-/* ─── LOGO SECTION ─── */
-function LogoSection() {
-  const [ref, vis] = useReveal();
-  return (
-    <section className="section section--muted">
-      <div className="container container--centered">
-        <div ref={ref} className={`logo-showcase rev${vis ? " vis" : ""}`}>
-          <div className="logo-showcase__badge">
-            <BottleSVG stroke="white" width={36} />
-            <span className="logo-showcase__wordmark">proof</span>
-          </div>
-          <p className="logo-showcase__desc">
-            The only POS built specifically for liquor stores that won't leave you behind.
-          </p>
-        </div>
-      </div>
-    </section>
-  );
-}
-
-/* ─── CTA SECTION ─── */
-function CTASection() {
-  const [urgRef, urgVis] = useReveal();
-  const [hRef, hVis] = useReveal();
-  const [pRef, pVis] = useReveal();
-  const [btnRef, btnVis] = useReveal();
-
-  return (
-    <section id="cta" className="section section--light">
-      <div className="container container--narrow container--centered">
-        <span ref={urgRef} className={`urgency-badge rev${urgVis ? " vis" : ""}`}>
-          Support changes are impacting stores now
-        </span>
-        <h2 ref={hRef} className={`cta__headline rev${hVis ? " vis" : ""}`}>
-          Don't wait<br />until it's <em>too late.</em>
-        </h2>
-        <p ref={pRef} className={`cta__sub rev${pVis ? " vis" : ""}`}>
-          Get a free transition plan and see how easy it is to move to a supported system. You don't have to wait until support ends to have a plan.
-        </p>
-        <div ref={btnRef} className={`rev${btnVis ? " vis" : ""}`}>
-          <a href="#contact-form" className="btn btn--primary">
-            Get My Free Transition Plan →
-          </a>
-          <p className="cta__friction">No commitment. No pressure. Just clarity.</p>
-        </div>
-      </div>
-    </section>
-  );
-}
-
-/* ─── CONTACT FORM SECTION ─── */
-function ContactFormSection() {
-  return (
-    <section id="contact-form" className="section section--navy section--form">
-      <div className="container container--narrow">
-        <HeroForm loaded={true} />
-      </div>
-    </section>
-  );
-}
 
 /* ─── FOOTER ─── */
 function Footer() {
@@ -590,10 +323,7 @@ export default function App() {
       <Ticker />
       <Problem />
       <Solution />
-      <Trust />
-      <LogoSection />
-      <CTASection />
-      <ContactFormSection />
+      <Contact />
       <Footer />
     </>
   );
