@@ -202,8 +202,26 @@ em { font-style: italic; }
   align-items: center;
   justify-content: space-between;
   transition: background 0.5s, box-shadow 0.5s;
+
+  background: transparent;
+}
+/* Default (on hero) = light/inverted */
+.nav__logo-text {
+  color: rgba(255, 255, 255, 0.9);
 }
 
+.nav__link {
+  color: rgba(255, 255, 255, 0.7);
+}
+
+.nav__link:hover {
+  color: #ffffff;
+}
+
+.nav__cta {
+  background: rgba(255, 255, 255, 0.9);
+  color: var(--navy);
+}
 .nav--stuck {
   background: rgba(247, 245, 240, 0.92);
   backdrop-filter: blur(16px);
@@ -270,6 +288,23 @@ em { font-style: italic; }
   max-width: 680px;
   margin: 0 auto;
   padding: 8rem 2rem 4rem;
+}
+/* ─── NAV (DEFAULT = HERO / NOT STUCK) ─── */
+.nav:not(.nav--stuck) .nav__logo-text {
+  color: #ffffff;
+}
+
+.nav:not(.nav--stuck) .nav__link {
+  color: rgba(255, 255, 255, 0.8);
+}
+
+.nav:not(.nav--stuck) .nav__link:hover {
+  color: #ffffff;
+}
+
+.nav:not(.nav--stuck) .nav__cta {
+  background: #ffffff;
+  color: var(--navy);
 }
 
 .hero__eyebrow {

@@ -18,7 +18,6 @@ const BottleSVG = ({ stroke = "#1b2d5b", width = 22 }) => (
     <rect x="17" y="0" width="14" height="2" fill={stroke} rx="1" />
   </svg>
 );
-
 /* ─── REVEAL HOOK ─── */
 function useReveal(threshold = 0.15) {
   const ref = useRef(null);
@@ -44,6 +43,7 @@ function useReveal(threshold = 0.15) {
 /* ─── NAV ─── */
 function Nav() {
   const [stuck, setStuck] = useState(false);
+
   useEffect(() => {
     const handler = () => setStuck(window.scrollY > 60);
     window.addEventListener("scroll", handler);
@@ -53,9 +53,10 @@ function Nav() {
   return (
     <nav className={`nav${stuck ? " nav--stuck" : ""}`}>
       <a href="#" className="nav__logo">
-        <BottleSVG stroke="#1b2d5b" width={22} />
+        <BottleSVG stroke={stuck ? "#1b2d5b" : "#ffffff"} width={22} />
         <span className="nav__logo-text">proof</span>
       </a>
+
       <div className="nav__links">
         <a href="#problem" className="nav__link">The Problem</a>
         <a href="#solution" className="nav__link">Solution</a>
@@ -71,18 +72,26 @@ function Hero({ loaded }) {
     <section className="hero">
 
       {/* Liquid gradient background */}
-      <div style={{ position:"absolute", inset:0, overflow:"hidden" }}>
-        <div style={{
-          position:"absolute", inset:0,
-          background:"linear-gradient(135deg,#061428 0%,#0a2240 25%,#0d3060 50%,#0a2240 75%,#061428 100%)",
-          backgroundSize:"300% 300%",
-          animation:"liquidShift 12s ease infinite",
-        }} />
-        <div style={{ position:"absolute", width:520, height:520, left:-100, top:-150, borderRadius:"50%", background:"radial-gradient(circle,#1a6eb5 0%,#0a3a6e 50%,transparent 70%)", filter:"blur(70px)", opacity:.55, mixBlendMode:"screen", animation:"blob1 14s ease-in-out infinite" }} />
-        <div style={{ position:"absolute", width:440, height:440, right:-80, bottom:-100, borderRadius:"50%", background:"radial-gradient(circle,#0e9a8a 0%,#064f4a 50%,transparent 70%)", filter:"blur(70px)", opacity:.55, mixBlendMode:"screen", animation:"blob2 17s ease-in-out infinite" }} />
-        <div style={{ position:"absolute", width:380, height:380, left:"40%", top:"20%", borderRadius:"50%", background:"radial-gradient(circle,#1451a8 0%,#0a2860 50%,transparent 70%)", filter:"blur(60px)", opacity:.5, mixBlendMode:"screen", animation:"blob3 11s ease-in-out infinite" }} />
-        <div style={{ position:"absolute", width:320, height:320, left:"20%", bottom:-50, borderRadius:"50%", background:"radial-gradient(circle,#0b7bbf 0%,#063a5c 50%,transparent 70%)", filter:"blur(60px)", opacity:.38, mixBlendMode:"screen", animation:"blob2 19s ease-in-out infinite reverse" }} />
-      </div>
+      <div style={{ position: "absolute", inset: 0, overflow: "hidden" }}>
+
+  <div
+    style={{
+      position: "absolute",
+      inset: 0,
+background: `
+  radial-gradient(at 15% 25%, #1b4f8a 0%, transparent 50%),
+  radial-gradient(at 85% 15%, #2f80ed 0%, transparent 50%),
+  radial-gradient(at 75% 75%, #00a8cc 0%, transparent 55%),
+  radial-gradient(at 25% 85%, #1451a8 0%, transparent 55%),
+  radial-gradient(at 50% 50%, #091a33 0%, #050d1a 100%)
+`,
+      filter: "blur(60px)",
+      transform: "scale(1.2)",
+      animation: "meshMove 25s ease-in-out infinite alternate",
+    }}
+  />
+
+</div>
 
       {/* Content */}
       <div className={`hero__content${loaded ? " hero__content--loaded" : ""}`}>
