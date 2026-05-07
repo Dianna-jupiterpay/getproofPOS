@@ -2,6 +2,37 @@ import { useState, useEffect, useRef } from "react";
 import "./style.css";
 import Contact from "./Contact.jsx";
 import Countdown from "./Countdown.jsx";
+import cancel from "./assets/cancel.png";
+import warning from "./assets/warning.png";
+import block from "./assets/block.png";
+import "./problem.css";
+
+
+import './problem.css';
+const CancelIcon = () => (
+  <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#c0392b" strokeWidth="2">
+    <circle cx="12" cy="12" r="10"/>
+    <line x1="15" y1="9" x2="9" y2="15"/>
+    <line x1="9" y1="9" x2="15" y2="15"/>
+  </svg>
+);
+
+const WarningIcon = () => (
+  <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#c8820a" strokeWidth="2">
+    <path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/>
+    <line x1="12" y1="9" x2="12" y2="13"/>
+    <line x1="12" y1="17" x2="12.01" y2="17"/>
+  </svg>
+);
+
+const BlockIcon = () => (
+  <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#1b2d5b" strokeWidth="2">
+    <circle cx="12" cy="12" r="10"/>
+    <line x1="4.93" y1="4.93" x2="19.07" y2="19.07"/>
+  </svg>
+);
+
+
 const BottleSVG = ({ stroke = "#1b2d5b", width = 22 }) => (
   <svg
     viewBox="0 0 48 100"
@@ -70,30 +101,11 @@ function Nav() {
 function Hero({ loaded }) {
   return (
     <section className="hero">
+      {/* Animated Mesh Background */}
+      <div className="hero__bg">
+        <div className="hero__mesh" />
+      </div>
 
-      {/* Liquid gradient background */}
-      <div style={{ position: "absolute", inset: 0, overflow: "hidden" }}>
-
-  <div
-    style={{
-      position: "absolute",
-      inset: 0,
-background: `
-  radial-gradient(at 15% 25%, #1b4f8a 0%, transparent 50%),
-  radial-gradient(at 85% 15%, #2f80ed 0%, transparent 50%),
-  radial-gradient(at 75% 75%, #00a8cc 0%, transparent 55%),
-  radial-gradient(at 25% 85%, #1451a8 0%, transparent 55%),
-  radial-gradient(at 50% 50%, #091a33 0%, #050d1a 100%)
-`,
-      filter: "blur(60px)",
-      transform: "scale(1.2)",
-      animation: "meshMove 25s ease-in-out infinite alternate",
-    }}
-  />
-
-</div>
-
-      {/* Content */}
       <div className={`hero__content${loaded ? " hero__content--loaded" : ""}`}>
         <p className={`hero__eyebrow${loaded ? " hero__eyebrow--loaded" : ""}`}>
           <span className="hero__eyebrow-dot" />
@@ -102,13 +114,22 @@ background: `
 
         <h1 className="hero__headline">
           <span className="wm">
-            <span className={`wm-inner${loaded ? " loaded" : ""}`} style={{ transitionDelay: "0.2s" }}>
-              POS Support Ending?
+            <span
+              className={`wm-inner${loaded ? " loaded" : ""}`}
+              style={{ transitionDelay: "0.2s" }}
+            >
+              LiquorPOS® <br />
+              End of Life is Coming.  
             </span>
           </span>
+
           <br />
+
           <span className="wm">
-            <span className={`wm-inner${loaded ? " loaded" : ""}`} style={{ transitionDelay: "0.36s" }}>
+            <span
+              className={`wm-inner${loaded ? " loaded" : ""}`}
+              style={{ transitionDelay: "0.36s" }}
+            >
               <em>Switch before it does.</em>
             </span>
           </span>
@@ -117,7 +138,9 @@ background: `
         <Countdown />
 
         <p className={`hero__sub${loaded ? " hero__sub--loaded" : ""}`}>
-          If your current POS is losing support or limiting your growth, now is the time to move. We help liquor stores switch systems with zero downtime and no data loss.
+          If your current POS is losing support or limiting your growth,
+          now is the time to move. We help liquor stores switch systems
+          with zero downtime and no data loss.
         </p>
 
         <a href="#contact-form" className="btn btn--primary">
@@ -152,99 +175,194 @@ function Ticker() {
   );
 }
 
-/* ─── PROBLEM ─── */
+// Problem.jsx
 function Problem() {
-  const [labelRef, labelVis] = useReveal();
-  const [headRef, headVis] = useReveal();
-
+  const [secRef, secVis] = useReveal();
+ 
   const cards = [
-    { icon: "🚫", title: "No new registers or locations", desc: "Your system won't allow expansion. Every opportunity to grow is blocked by your own software." },
-    { icon: "⚠️", title: "Support is winding down", desc: "You've heard the rumors. Nobody's giving you a clear answer about what happens next." },
-    { icon: "🔒", title: "No upgrade path", desc: "You're running on legacy tech with security risks, slow performance, and zero roadmap." },
+    {
+      icon: <img src={cancel} alt="" width={28} height={28} />,
+      title: "No new registers or locations",
+      desc: "LiquorPOS ® ceased selling new licenses effective May 1st, 2026. Every opportunity to grow is now blocked by your own software.",
+    },
+    {
+      icon: <img src={warning} alt="" width={28} height={28} />,
+      title: "Support is winding down",
+      desc: "LiquorPOS® support ends May 1st, 2027 — leaving you with no way to troubleshoot issues or keep your business running.",
+    },
+    {
+      icon: <img src={block} alt="" width={28} height={28} />,
+      title: "No upgrade path",
+      desc: "End of life means no new features, no security patches, and no future. You're frozen in place.",
+    },
   ];
-
+ 
   return (
     <section id="problem" className="section section--light">
+      <div className="section-frame">
       <div className="container">
-        <p ref={labelRef} className={`section__label rev${labelVis ? " vis" : ""}`}>
-          The Situation
-        </p>
-        <h2 ref={headRef} className={`section__headline rev${headVis ? " vis" : ""}`}>
-          Many liquor store owners<br />are facing <em>this</em> right now.
-        </h2>
-        <div className="card-grid card-grid--3">
-          {cards.map((c, i) => {
-            const [ref, vis] = useReveal();
-            return (
-              <div
-                key={i}
-                ref={ref}
-                className={`card rev${vis ? " vis" : ""}`}
-                style={{ transitionDelay: `${i * 0.1}s` }}
-              >
-                <div className="card__icon">{c.icon}</div>
-                <h3 className="card__title">{c.title}</h3>
-                <p className="card__desc">{c.desc}</p>
+        <div
+          ref={secRef}
+          className={`prob-block rev${secVis ? " vis" : ""}`}
+        >
+          {/* Header */}
+          <div className="prob-block__header">
+            <p className="section__label">The Situation</p>
+            <h2 className="prob-block__headline">
+              Many LiquorPOS® users<br />are facing this right now.
+            </h2>
+          </div>
+ 
+          {/* Bordered grid */}
+          <div className="prob-grid">
+            {cards.map((c, i) => (
+              <div key={i} className="prob-text-cell">
+                <div className="prob-icon-box">{c.icon}</div>
+                <h3 className="prob-text-cell__title">{c.title}</h3>
+                <p className="prob-text-cell__desc">{c.desc}</p>
               </div>
-            );
-          })}
+            ))}
+          </div>
         </div>
+      </div>
       </div>
     </section>
   );
 }
 
+
 /* ─── SOLUTION ─── */
+// function Solution() {
+//   const [labelRef, labelVis] = useReveal();
+//   const [headRef, headVis] = useReveal();
+//   const [mockRef, mockVis] = useReveal();
+
+//   const features = [
+//     { n: "01", title: "Seamless transition from your current POS", desc: "We map your existing setup and handle the migration end-to-end. Your staff keeps working during the switch." },
+//     { n: "02", title: "Preserve your data, inventory & workflows", desc: "Every product, every price, ALL sales history. Nothing gets lost in translation." },
+//     { n: "03", title: "Add registers, locations & features anytime", desc: "Expand when you're ready — not when your software allows. Scale on your terms." },
+//     { n: "04", title: "Ongoing support from a real team", desc: "Not a chatbot. Not a ticket queue. Real people who understand liquor store operations." },
+//   ];
+
+//   return (
+//     <section id="solution" className="section section--alt">
+//       <div className="container">
+//         <p ref={labelRef} className={`section__label rev${labelVis ? " vis" : ""}`}>
+//           The Solution
+//         </p>
+//         <h2 ref={headRef} className={`section__headline rev${headVis ? " vis" : ""}`}>
+//           We built this<br />for stores <em>like yours.</em>
+//         </h2>
+
+//         <div className="solution__grid">
+//           <div className="solution__features">
+//             {features.map((f, i) => {
+//               const [ref, vis] = useReveal();
+//               return (
+//                 <div
+//                   key={i}
+//                   ref={ref}
+//                   className={`feature-row slide-left${vis ? " vis" : ""}${i === 0 ? " feature-row--first" : ""}`}
+//                   style={{ transitionDelay: `${i * 0.1}s` }}
+//                 >
+//                   <span className="feature-row__num">{f.n}</span>
+//                   <div>
+//                     <h3 className="feature-row__title">{f.title}</h3>
+//                     <p className="feature-row__desc">{f.desc}</p>
+//                   </div>
+//                 </div>
+//               );
+//             })}
+//           </div>
+
+
+//         </div>
+//       </div>
+//     </section>
+//   );
+// }
 function Solution() {
-  const [labelRef, labelVis] = useReveal();
-  const [headRef, headVis] = useReveal();
-  const [mockRef, mockVis] = useReveal();
-
+  const [secRef, secVis] = useReveal();
+ 
   const features = [
-    { n: "01", title: "Seamless transition from your current POS", desc: "We map your existing setup and handle the migration end-to-end. Your staff keeps working during the switch." },
-    { n: "02", title: "Preserve your data, inventory & workflows", desc: "Every product, every price, every customer record. Nothing gets lost in translation." },
-    { n: "03", title: "Add registers, locations & features anytime", desc: "Expand when you're ready — not when your software allows. Scale on your terms." },
-    { n: "04", title: "Ongoing support from a real team", desc: "Not a chatbot. Not a ticket queue. Real people who understand liquor store operations." },
+    {
+      icon: (
+        <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.75">
+          <path d="M4 17V7l8-4 8 4v10l-8 4-8-4z" /><path d="M12 3v18M4 7l8 4 8-4" />
+        </svg>
+      ),
+      title: "Seamless migration",
+      desc: "We map your existing setup and handle the switch end-to-end. Your staff keeps working throughout.",
+    },
+    {
+      icon: (
+        <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.75">
+          <ellipse cx="12" cy="5" rx="9" ry="3" /><path d="M3 5v14c0 1.66 4.03 3 9 3s9-1.34 9-3V5" /><path d="M3 12c0 1.66 4.03 3 9 3s9-1.34 9-3" />
+        </svg>
+      ),
+      title: "All data preserved",
+      desc: "Every product, price, and sale history transfers over. Nothing gets lost in translation.",
+    },
+    {
+      icon: (
+        <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.75">
+          <rect x="2" y="3" width="20" height="14" rx="2" /><path d="M8 21h8M12 17v4" />
+        </svg>
+      ),
+      title: "Scale on your terms",
+      desc: "Add registers, locations, and features whenever you're ready — not when your software allows.",
+    },
+    {
+      icon: (
+        <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.75">
+          <path d="M22 16.92v3a2 2 0 0 1-2.18 2A19.86 19.86 0 0 1 3.08 4.18 2 2 0 0 1 5.07 2h3a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L9.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0 1 23 17z" />
+        </svg>
+      ),
+      title: "Real support team",
+      desc: "Not a chatbot. Not a ticket queue. Real people who understand liquor store operations.",
+    },
   ];
-
+ 
   return (
     <section id="solution" className="section section--alt">
       <div className="container">
-        <p ref={labelRef} className={`section__label rev${labelVis ? " vis" : ""}`}>
-          The Solution
-        </p>
-        <h2 ref={headRef} className={`section__headline rev${headVis ? " vis" : ""}`}>
-          We built this<br />for stores <em>like yours.</em>
-        </h2>
+        <div
+          ref={secRef}
+          className={`sol-block rev${secVis ? " vis" : ""}`}
+        >
+          <div className="sol-block__inner">
+            {/* Left panel */}
+            <div className="sol-left">
+              <div>
+                <p className="section__label">The Solution</p>
+                <h2 className="sol-left__headline">
+                  Why leading stores<br />choose Proof
+                </h2>
+                <p className="sol-left__sub">
+                  We built a migration path built specifically for LiquorPOS® users —
+                  zero downtime, all your data intact, and a team that actually picks up the phone.
+                </p>
+              </div>
 
-        <div className="solution__grid">
-          <div className="solution__features">
-            {features.map((f, i) => {
-              const [ref, vis] = useReveal();
-              return (
-                <div
-                  key={i}
-                  ref={ref}
-                  className={`feature-row slide-left${vis ? " vis" : ""}${i === 0 ? " feature-row--first" : ""}`}
-                  style={{ transitionDelay: `${i * 0.1}s` }}
-                >
-                  <span className="feature-row__num">{f.n}</span>
-                  <div>
-                    <h3 className="feature-row__title">{f.title}</h3>
-                    <p className="feature-row__desc">{f.desc}</p>
-                  </div>
+            </div>
+ 
+            {/* Right 2×2 card grid */}
+            <div className="sol-cards">
+              {features.map((f, i) => (
+                <div key={i} className="sol-card">
+                  <div className="sol-card__icon">{f.icon}</div>
+                  <h3 className="sol-card__title">{f.title}</h3>
+                  <p className="sol-card__desc">{f.desc}</p>
                 </div>
-              );
-            })}
+              ))}
+            </div>
           </div>
-
-
         </div>
       </div>
     </section>
   );
 }
-
+ 
 
 /* ─── FOOTER ─── */
 function Footer() {

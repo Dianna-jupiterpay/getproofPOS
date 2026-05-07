@@ -1,0 +1,394 @@
+/* ─────────────────────────────────────────
+   problem.css — Problem & Solution Sections
+   ───────────────────────────────────────── */
+
+/* ─── SECTION FRAME ─── */
+.section-frame {
+  width: 100%;
+}
+
+/* ═══════════════════════════════════════════
+   PROBLEM SECTION
+   ═══════════════════════════════════════════ */
+
+.prob-block {
+  width: 100%;
+}
+
+.prob-block__header {
+  text-align: center;
+  margin-bottom: 3.5rem;
+}
+
+.prob-block__headline {
+  font-size: clamp(2rem, 4vw, 3.2rem);
+  line-height: 1.1;
+  letter-spacing: -0.025em;
+  color: var(--ink);
+  margin-top: 0.5rem;
+}
+
+.prob-grid {
+  border: 1px solid rgba(0, 0, 0, 0.08);
+  border-radius: 16px;
+  overflow: hidden;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  background: var(--surface);
+}
+
+.prob-text-cell {
+  padding: 2rem 1.75rem;
+  position: relative;
+  border-right: 1px solid rgba(0, 0, 0, 0.08);
+  transition:
+    background 0.25s ease,
+    box-shadow 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.prob-text-cell:last-child {
+  border-right: none;
+}
+
+/* ─── HOVER: background ─── */
+.prob-text-cell:hover {
+  background: rgba(27, 45, 91, 0.02);
+}
+
+/* ─── HOVER: inset border glow — middle card ─── */
+.prob-text-cell:hover {
+  box-shadow:
+    inset 0  2px 8px -2px rgba(47, 128, 237, 0.2),
+    inset 0 -2px 8px -2px rgba(0, 168, 204, 0.15);
+}
+
+/* ─── HOVER: inset border glow — first card (add left) ─── */
+.prob-text-cell:first-child:hover {
+  box-shadow:
+    inset  2px 0   8px -2px rgba(47, 128, 237, 0.2),
+    inset  0   2px 8px -2px rgba(47, 128, 237, 0.2),
+    inset  0  -2px 8px -2px rgba(0, 168, 204, 0.15);
+}
+
+/* ─── HOVER: inset border glow — last card (add right) ─── */
+.prob-text-cell:last-child:hover {
+  box-shadow:
+    inset -2px 0   8px -2px rgba(47, 128, 237, 0.2),
+    inset  0   2px 8px -2px rgba(47, 128, 237, 0.2),
+    inset  0  -2px 8px -2px rgba(0, 168, 204, 0.15);
+}
+
+/* ─── HOVER: accent line sweeping in from left ─── */
+.prob-text-cell::after {
+  content: '';
+  position: absolute;
+  top: 0; left: 0; right: 0;
+  height: 2px;
+  background: var(--navy);
+  transform: scaleX(0);
+  transform-origin: left;
+  transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.prob-text-cell:hover::after {
+  transform: scaleX(1);
+}
+
+/* ─── ICON BOX ─── */
+.prob-icon-box {
+  width: 52px;
+  height: 52px;
+  border-radius: 12px;
+  background: var(--bg);
+  border: 1px solid rgba(0, 0, 0, 0.07);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 1.25rem;
+  transition:
+    transform 260ms ease,
+    background-color 260ms ease,
+    box-shadow 0.35s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+/* ─── TYPOGRAPHY ─── */
+.prob-text-cell__title {
+  font-size: 0.95rem;
+  font-weight: 600;
+  color: var(--ink);
+  margin-bottom: 0.5rem;
+  line-height: 1.3;
+}
+
+.prob-text-cell__desc {
+  font-size: 0.82rem;
+  line-height: 1.7;
+  color: var(--ink2);
+}
+
+/* ─── HOVER: content animations ─── */
+.prob-icon-box,
+.prob-text-cell__title,
+.prob-text-cell__desc {
+  transition:
+    transform 260ms ease,
+    background-color 260ms ease;
+}
+
+.prob-text-cell:hover .prob-icon-box {
+  background: #dce6ff;
+  transform: translateX(-6px) scale(1.08);
+}
+
+.prob-text-cell:hover .prob-text-cell__title {
+  transform: scale(1.04);
+}
+
+.prob-text-cell:hover .prob-text-cell__desc {
+  transform: scale(1.04);
+}
+
+/* Ensure content sits above pseudo-elements */
+.prob-text-cell > * {
+  position: relative;
+  z-index: 1;
+}
+
+/* ═══════════════════════════════════════════
+   SOLUTION SECTION
+   ═══════════════════════════════════════════ */
+
+.sol-block {
+  width: 100%;
+}
+
+.sol-block__inner {
+  display: grid;
+  grid-template-columns: 5fr 7fr;
+  border: 1px solid rgba(0, 0, 0, 0.08);
+  border-radius: 8px;
+  overflow: hidden;
+  background: var(--surface);
+  min-height: 480px;
+}
+
+/* Left panel */
+.sol-left {
+  padding: 3rem 2.5rem;
+  border-right: 1px solid rgba(0, 0, 0, 0.08);
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  position: relative;
+  overflow: hidden;
+  background: var(--bg);
+}
+
+/* Subtle gradient blob bottom-left */
+.sol-left::before {
+  content: '';
+  position: absolute;
+  bottom: -80px;
+  left: -80px;
+  width: 380px;
+  height: 380px;
+  border-radius: 50%;
+  background:
+    radial-gradient(ellipse at 20% 80%, rgba(47, 128, 237, 0.45) 0%, transparent 55%),
+    radial-gradient(ellipse at 55% 90%, rgba(0, 168, 204, 0.3)   0%, transparent 50%),
+    radial-gradient(ellipse at 10% 60%, rgba(20,  81, 168, 0.4)  0%, transparent 50%);
+  filter: blur(52px);
+  pointer-events: none;
+  z-index: 0;
+}
+
+.sol-left > * {
+  position: relative;
+  z-index: 1;
+}
+
+.sol-left__headline {
+  font-size: clamp(1.6rem, 3vw, 2.4rem);
+  line-height: 1.15;
+  letter-spacing: -0.025em;
+  color: var(--ink);
+  margin: 0.75rem 0 1rem;
+}
+
+.sol-left__sub {
+  font-size: 0.85rem;
+  line-height: 1.75;
+  color: var(--ink2);
+  margin-bottom: 2rem;
+}
+
+.sol-left__cta {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  background: var(--navy);
+  color: #ffffff;
+  border: none;
+  border-radius: 10px;
+  padding: 0.75rem 1.5rem;
+  font-family: 'Inter', sans-serif;
+  font-size: 0.82rem;
+  font-weight: 600;
+  letter-spacing: 0.04em;
+  text-decoration: none;
+  text-transform: uppercase;
+  transition: background 0.2s, transform 0.2s;
+  align-self: flex-start;
+}
+
+.sol-left__cta:hover {
+  background: var(--navy-mid);
+  transform: translateY(-1px);
+}
+
+/* Right 2×2 card grid */
+.sol-cards {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  grid-template-rows: 1fr 1fr;
+}
+
+.sol-card {
+  padding: 2rem 1.75rem;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.08);
+  border-right: 1px solid rgba(0, 0, 0, 0.08);
+  transition: background 0.25s ease;
+  position: relative;
+  overflow: hidden;
+}
+
+.sol-card:nth-child(2n) {
+  border-right: none;
+}
+
+.sol-card:nth-child(3),
+.sol-card:nth-child(4) {
+  border-bottom: none;
+}
+
+.sol-card:hover {
+  background: rgba(27, 45, 91, 0.02);
+}
+
+/* Accent line on hover */
+.sol-card::after {
+  content: '';
+  position: absolute;
+  top: 0; left: 0; right: 0;
+  height: 2px;
+  background: var(--navy);
+  transform: scaleX(0);
+  transform-origin: left;
+  transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.sol-card:hover::after {
+  transform: scaleX(1);
+}
+
+.sol-card__icon {
+  width: 44px;
+  height: 44px;
+  border-radius: 10px;
+  background: var(--bg);
+  border: 1px solid rgba(0, 0, 0, 0.07);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--navy);
+  margin-bottom: 1rem;
+}
+
+.sol-card__title {
+  font-size: 0.92rem;
+  font-weight: 600;
+  color: var(--ink);
+  margin-bottom: 0.4rem;
+  line-height: 1.3;
+}
+
+.sol-card__desc {
+  font-size: 0.8rem;
+  line-height: 1.7;
+  color: var(--ink2);
+}
+
+/* Smooth transitions */
+.sol-card__icon,
+.sol-card__title,
+.sol-card__desc {
+  transition:
+    transform 260ms ease,
+    background-color 260ms ease;
+}
+
+/* Zoom + shift left */
+.sol-card:hover .sol-card__icon {
+  background: #dce6ff;
+  transform: translateX(-6px) scale(1.08);
+}
+
+.sol-card:hover .sol-card__title {
+  transform: scale(1.08);
+}
+
+.sol-card:hover .sol-card__desc {
+  transform: scale(1.08);
+}
+
+/* ─── RESPONSIVE ─── */
+@media (max-width: 900px) {
+  .prob-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .prob-text-cell {
+    border-right: none;
+    border-bottom: 1px solid rgba(0, 0, 0, 0.08);
+  }
+
+  .prob-text-cell:last-child {
+    border-bottom: none;
+  }
+
+  .sol-block__inner {
+    grid-template-columns: 1fr;
+  }
+
+  .sol-left {
+    border-right: none;
+    border-bottom: 1px solid rgba(0, 0, 0, 0.08);
+    padding: 2.5rem 2rem;
+  }
+
+  .sol-cards {
+    grid-template-columns: 1fr 1fr;
+  }
+}
+
+@media (max-width: 540px) {
+  .sol-cards {
+    grid-template-columns: 1fr;
+  }
+
+  .sol-card:nth-child(2n) {
+    border-right: none;
+  }
+
+  .sol-card:nth-child(3) {
+    border-bottom: 1px solid rgba(0, 0, 0, 0.08);
+  }
+
+  .sol-card:nth-child(4) {
+    border-bottom: none;
+  }
+
+  .sol-card {
+    border-right: none;
+  }
+}

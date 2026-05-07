@@ -1,11 +1,10 @@
-
 /* ─────────────────────────────────────────
    CONTACT SECTION — append to style.css
    ───────────────────────────────────────── */
 
 /* ─── SECTION WRAPPER ─── */
 .contact-section {
-  background: var(--bg);
+  background: var(--navy);
   padding: 6rem 4rem;
 }
 
@@ -20,11 +19,12 @@
 
 /* ─── LEFT PANEL ─── */
 .contact-left__headline {
-  font-family: 'Instrument Serif', serif;
+  font-family: 'Poppins', system-ui, sans-serif;
   font-size: clamp(2rem, 3.5vw, 3rem);
   line-height: 1.1;
   letter-spacing: -0.025em;
   color: var(--ink);
+  color: var(--bg2);
   margin-bottom: 1.25rem;
 }
 
@@ -37,9 +37,9 @@
   font-size: 0.92rem;
   font-weight: 400;
   line-height: 1.75;
-  color: var(--ink2);
+  color: var(--bg2);
   margin-bottom: 2rem;
-  max-width: 420px;
+  max-width: 600px;
 }
 
 /* ─── CHECKLIST ─── */
@@ -57,7 +57,7 @@
   gap: 0.75rem;
   font-size: 0.9rem;
   font-weight: 500;
-  color: var(--ink);
+  color: var(--bg);
   line-height: 1.5;
 }
 
@@ -75,7 +75,7 @@
 }
 
 .contact-quote__text {
-  font-family: 'Instrument Serif', serif;
+  font-family: 'Poppins', serif;
   font-size: 1.05rem;
   font-style: italic;
   line-height: 1.65;
@@ -111,10 +111,11 @@
   border-radius: 16px;
   padding: 2.25rem;
   box-shadow: 0 4px 24px rgba(0, 0, 0, 0.06);
+ background-color: #f1f9ff;
 }
 
 .contact-card__title {
-  font-family: 'Instrument Serif', serif;
+  font-family: 'Poppins', system-ui, sans-serif;
   font-size: 1.55rem;
   letter-spacing: -0.02em;
   color: var(--ink);
@@ -176,7 +177,7 @@
   font-family: 'Inter', sans-serif;
   font-size: 0.87rem;
   color: var(--ink);
-  background: var(--bg);
+  background:  var(--surface);
   outline: none;
   transition: border-color 0.2s, box-shadow 0.2s;
 }
@@ -286,7 +287,7 @@
 }
 
 .contact-success h4 {
-  font-family: 'Instrument Serif', serif;
+  font-family: 'Cabinet Grotesk', system-ui, sans-serif;
   font-size: 1.6rem;
   color: var(--ink);
   margin-bottom: 0.5rem;

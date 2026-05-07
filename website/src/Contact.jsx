@@ -60,18 +60,18 @@ export default function Contact() {
         {/* ── LEFT PANEL ── */}
         <div className="contact-left">
           <h2 className="contact-left__headline">
-            Learn what our software<br />can do for <em>you.</em>
+            What's Included
           </h2>
 
           <p className="contact-left__sub">
-            We'll save your historical data while helping you adapt to new
+            We conserve and use your historical data while helping you adapt to new
             changes in your POS system — on your timeline, without disruption.
           </p>
 
           <ul className="contact-checklist">
             <li className="contact-checklist__item">
               <CheckIcon />
-              <span>Continue to receive live support</span>
+              <span>Continue to receive live support for both LiquorPOS and Proof</span>
             </li>
             <li className="contact-checklist__item">
               <CheckIcon />
