@@ -126,7 +126,7 @@ em { font-style: italic; }
 .section { padding: 4rem 0; }
 .section--light  { background: var(--surface); }
 .section--alt    { background: var(--surface); }
-.section--form   { padding: 6rem 2rem; display: flex; justify-content: center; }
+.section--form   { padding: 4rem 2rem; display: flex; justify-content: center; }
 
 .section__label {
   font-size: 0.8rem;
@@ -253,7 +253,7 @@ em { font-style: italic; }
   display: flex;
   align-items: center;
   justify-content: center;
-  padding: 1rem  4rem;
+  padding: 1rem 4rem;
   background: #050d1a;
 }
 
@@ -266,7 +266,6 @@ em { font-style: italic; }
 .hero__mesh {
   position: absolute;
   inset: 0;
-  
   background:
     radial-gradient(at 15% 25%, rgb(27, 79, 138) 0%, transparent 50%),
     radial-gradient(at 85% 15%, rgb(47, 128, 237) 0%, transparent 50%),
@@ -298,7 +297,6 @@ em { font-style: italic; }
   display: inline-flex;
   align-items: center;
   gap: 0.55rem;
-  
   margin-bottom: 1rem;
   font-size: 0.75rem;
   font-weight: 500;
@@ -329,7 +327,6 @@ em { font-style: italic; }
   letter-spacing: -0.055em;
   color: #ffffff;
   margin-bottom: 2rem;
-  
 }
 
 .hero__headline em {
@@ -343,7 +340,6 @@ em { font-style: italic; }
   max-width: 800px;
   margin: 2rem auto 2rem;
   font-size: 1.02rem;
-  
   line-height: 1.8;
   color: rgba(255, 255, 255, 0.62);
   opacity: 0;
@@ -372,12 +368,12 @@ em { font-style: italic; }
   display: flex;
   flex-direction: column;
   align-items: center;
-    background: rgba(255, 255, 255, 0.08);
+  background: rgba(255, 255, 255, 0.08);
   backdrop-filter: blur(12px);
   -webkit-backdrop-filter: blur(12px);
   border: 1px solid rgba(255, 255, 255, 0.15);
   border-radius: 16px;
-   padding: 1.25rem .75rem;
+  padding: 1.25rem .75rem;
 }
 
 .time-box span {
@@ -405,8 +401,8 @@ em { font-style: italic; }
   padding: 0.6rem 0;
   overflow: hidden;
   white-space: nowrap;
-
 }
+
 .ticker__track {
   display: inline-flex;
   animation: tick 32s linear infinite;
@@ -702,7 +698,7 @@ em { font-style: italic; }
 /* ─── FOOTER ─── */
 .footer {
   background: var(--ink);
-  padding: 2rem 4rem;
+  padding: 0.6rem 4rem;
   display: flex;
   align-items: center;
   justify-content: space-between;
@@ -727,94 +723,67 @@ em { font-style: italic; }
   letter-spacing: 0.04em;
 }
 
-
-
-  .hero__headline{
-    font-family: 'Poppins', system-ui, sans-serif;
-    line-height: 1.2;    
-  }
-  
-
-  .time-box{
-    padding: .5rem .5rem;
-  }
-  .time-box span{
-    font-size: 2rem;
-    min-width: 50px;
-    padding: 8px 12px;
-
-}
-
+/* ─── LOGO ─── */
 .nav__logo-img {
   width: 250px;
   height: auto;
   display: block;
   object-fit: contain;
   transition: filter 220ms ease;
-}
-
-/* Default transparent navbar */
-.nav__logo-img {
+  /* White version for transparent nav */
   filter: brightness(0) saturate(100%) invert(96%) sepia(7%) saturate(138%) hue-rotate(186deg) brightness(115%) contrast(92%);
 }
 
-/* Stuck navbar */
 .nav--stuck .nav__logo-img {
   filter: none;
 }
 
-.footer {
-  background: var(--ink);
-  padding: 0.6rem 4rem;  /* was 2rem 4rem */
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-}
 .footer .nav__logo-img {
   width: 175px;
 }
+
+/* ─── SCROLL ANCHORS ─── */
 #problem,
 #solution {
   scroll-margin-top: 24px;
 }
 
-/* ─── MOBILE FIXES ─── */
+/* ─── HERO HEADLINE (desktop override) ─── */
+.hero__headline {
+  font-family: 'Poppins', system-ui, sans-serif;
+  line-height: 1.2;
+}
+
+/* ─── COUNTDOWN (desktop override) ─── */
+.time-box {
+  padding: .5rem .5rem;
+}
+
+.time-box span {
+  font-size: 2rem;
+  min-width: 50px;
+  padding: 8px 12px;
+}
+
+/* ═══════════════════════════════════════════
+   MOBILE & TOUCH
+   ═══════════════════════════════════════════ */
+
+/* Hide custom cursor entirely on touch devices */
+@media (hover: none), (pointer: coarse) {
+  .cur-el { display: none !important; }
+  body, a, button, input, select { cursor: auto !important; }
+}
+
 @media (max-width: 768px) {
 
-  /* ── Hero headline: LiquorPOS line bigger, em line smaller ── */
-  .hero__headline {
-    font-size: clamp(2rem, 8vw, 3.2rem);
-  }
-
-  .hero__headline em {
-    font-size: 1.2rem;
-    letter-spacing: 0.05em;
-  }
-
-  /* ── Countdown: shrink numbers so they fit ── */
-  .countdown {
-    gap: 10px;
-  }
-
-  .time-box {
-    padding: 0.4rem 0.3rem;
-    border-radius: 10px;
-  }
-
-  .time-box span {
-    font-size: 1.4rem;
-    min-width: 36px;
-    padding: 4px 6px;
-  }
-
-  .time-box label {
-    font-size: 0.55rem;
-    letter-spacing: 0.5px;
-  }
-
-  /* ── Nav: pull logo left, fix CTA button ── */
+  /* ── Nav: hide Problem/Solution links, keep logo + CTA ── */
   .nav {
     padding: 0 1rem;
+  }
+
+  .nav__link {
+    display: none;
   }
 
   .nav__logo {
@@ -823,23 +792,104 @@ em { font-style: italic; }
 
   .nav__logo-img {
     width: 130px;
+    margin-left: -12px;
   }
 
   .nav__cta {
     white-space: nowrap;
-    padding: 0.55rem 1.5rem;
+    padding: 0.55rem 1.25rem;
     font-size: 0.75rem;
   }
 
-  /* ── Problem headline: smaller font ── */
-  .prob-block__headline {
-    font-size: clamp(1.3rem, 5vw, 1.8rem);
+  /* ── Hero headline: large, clean, fluid ── */
+  .hero__headline {
+    font-size: clamp(2.4rem, 9vw, 3.2rem);
+    line-height: 1.15;
+    letter-spacing: -0.03em;
   }
+
+  .hero__headline em {
+    font-size: clamp(1.1rem, 4.5vw, 1.4rem);
+    letter-spacing: 0.04em;
+    display: block;
+    margin-top: 0.3rem;
+  }
+
+  /* ── Countdown: compact ── */
+  .countdown {
+    gap: 8px;
+  }
+
+  .time-box {
+    padding: 0.45rem 0.35rem;
+    border-radius: 10px;
+  }
+
+  .time-box span {
+    font-size: 1.5rem;
+    min-width: 38px;
+    padding: 4px 6px;
+  }
+
+  .time-box label {
+    font-size: 0.52rem;
+    letter-spacing: 0.5px;
+  }
+
+  /* ── Problem headline ── */
+  .prob-block__headline {
+    font-size: clamp(1.5rem, 6vw, 2rem);
+  }
+
+  /* ── Solution left-panel headline ── */
+  .sol-left__headline {
+    font-size: clamp(1.4rem, 5.5vw, 1.9rem);
+  }
+
+  /* ── Contact / form section ── */
+  .section--form {
+    padding: 3rem 1rem;
+  }
+
+  .form-panel {
+    padding: 1.5rem 1.25rem;
+  }
+
+  .form-panel__header {
+    margin-bottom: 1.25rem;
+  }
+
+  .form-panel__title {
+    font-size: clamp(1.3rem, 5vw, 1.7rem);
+  }
+
+  /* ── Field rows: stack on small screens ── */
+  .field-row {
+    grid-template-columns: 1fr;
+  }
+
+  /* ── Footer ── */
+  .footer {
+    padding: 0.75rem 1rem;
+    flex-direction: column;
+    gap: 0.5rem;
+    text-align: center;
+  }
+
+  .footer .nav__logo-img {
+    width: 120px;
+  }
+  
+.hero {
+  padding: 1rem 2rem;
 }
 
-@media (max-width: 768px) {
-  .nav__logo-img {
-    width: 130px;
-    margin-left: -12px; /* nudges logo further left by trimming SVG padding */
-  }
+.hero__headline{
+  font-size: 3rem;
+}
+}
+
+.hero_title{
+  overflow: visible;
+  padding:4px;
 }

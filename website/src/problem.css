@@ -6,11 +6,6 @@
 .section-frame {
   width: 100%;
 }
-
-/* ═══════════════════════════════════════════
-   PROBLEM SECTION
-   ═══════════════════════════════════════════ */
-
 .prob-block {
   width: 100%;
 }
@@ -379,4 +374,13 @@
   .sol-card {
     border-right: none;
   }
+  .prob-block__headline {
+  font-size: clamp(1.8rem, 3vw, 2rem);
+  line-height: 1.15;
+  letter-spacing: -0.025em;
+  color: var(--ink);
+
 }
+}
+
+

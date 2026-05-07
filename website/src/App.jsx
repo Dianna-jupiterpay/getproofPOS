@@ -91,23 +91,27 @@ const BottleSVG = ({ stroke = "#1b2d5b", width = 22 }) => (
   </svg>
 );
 /* ─── REVEAL HOOK ─── */
-function useReveal(threshold = 0.15) {
+function useReveal(threshold = 0.08) {
   const ref = useRef(null);
   const [visible, setVisible] = useState(false);
   useEffect(() => {
     const el = ref.current;
     if (!el) return;
-    const obs = new IntersectionObserver(
-      ([entry]) => {
-        if (entry.isIntersecting) {
-          setVisible(true);
-          obs.unobserve(el);
-        }
-      },
-      { threshold }
-    );
-    obs.observe(el);
-    return () => obs.disconnect();
+    // small delay so elements above the fold don't skip the animation
+    const timer = setTimeout(() => {
+      const obs = new IntersectionObserver(
+        ([entry]) => {
+          if (entry.isIntersecting) {
+            setVisible(true);
+            obs.unobserve(el);
+          }
+        },
+        { threshold }
+      );
+      obs.observe(el);
+      return () => obs.disconnect();
+    }, 100);
+    return () => clearTimeout(timer);
   }, [threshold]);
   return [ref, visible];
 }
@@ -158,13 +162,14 @@ function Hero({ loaded }) {
 
         <h1 className="hero__headline">
           <span className="wm">
+            <div className="hero_title">
             <span
               className={`wm-inner${loaded ? " loaded" : ""}`}
               style={{ transitionDelay: "0.2s" }}
             >
               LiquorPOS<sup className="reg" style={{ fontSize: '0.7em', fontWeight: 8 }}>®</sup> <br />
               End of Life is Coming.  
-            </span>
+            </span></div>
           </span>
 
           <br />
@@ -255,26 +260,25 @@ function Problem() {
     },
   ];
  
-  return (
-    <section id="problem" className="section section--light">
-      <div className="section-frame">
+ return (
+  <section id="problem" className="section section--light">
+    <div className="section-frame">
       <div className="container">
-        <div
-          ref={secRef}
-          className={`prob-block rev${secVis ? " vis" : ""}`}
-        >
-          {/* Header */}
-          <div className="prob-block__header">
+        <div className="prob-block">
+          <div ref={secRef} className={`prob-block__header rev${secVis ? " vis" : ""}`}>
             <p className="section__label">The Situation</p>
             <h2 className="prob-block__headline">
-              Many LiquorPOS<sup className="reg" style={{ fontSize: '0.6em' }}>®</sup>  users<br />are facing this right now.
+              Many LiquorPOS<sup className="reg" style={{ fontSize: '0.6em' }}>®</sup> users<br />are facing this right now.
             </h2>
           </div>
- 
-          {/* Bordered grid */}
+
           <div className="prob-grid">
             {cards.map((c, i) => (
-              <div key={i} className="prob-text-cell">
+              <div
+                key={i}
+                className={`prob-text-cell rev${secVis ? " vis" : ""}`}
+                style={{ transitionDelay: secVis ? `${0.15 + i * 0.12}s` : "0s" }}
+              >
                 <div className="prob-icon-box">{c.icon}</div>
                 <h3 className="prob-text-cell__title">{c.title}</h3>
                 <p className="prob-text-cell__desc">{c.desc}</p>
@@ -283,9 +287,9 @@ function Problem() {
           </div>
         </div>
       </div>
-      </div>
-    </section>
-  );
+    </div>
+  </section>
+);
 }
 
 
@@ -330,45 +334,42 @@ function Solution() {
       desc: "Not a chatbot. Not a ticket queue. Real people who understand liquor store operations.",
     },
   ];
- 
-  return (
-    <section id="solution" className="section section--alt">
-      <div className="container">
-        <div
-          ref={secRef}
-          className={`sol-block rev${secVis ? " vis" : ""}`}
-        >
-          <div className="sol-block__inner">
-            {/* Left panel */}
-            <div className="sol-left">
-              <div>
-                <p className="section__label">The Solution</p>
-                <h2 className="sol-left__headline">
-                  Why leading stores<br />choose Proof
-                </h2>
-                <p className="sol-left__sub">
-                  We built a migration path built specifically for LiquorPOS<sup className="reg">®</sup> users —
-                  zero downtime, all your data intact, and a team that actually picks up the phone.
-                </p>
-              </div>
+return (
+  <section id="solution" className="section section--alt">
+    <div className="container">
+      <div className="sol-block">
+        <div className="sol-block__inner">
+          <div ref={secRef} className={`sol-left rev${secVis ? " vis" : ""}`}>
+            <div>
+              <p className="section__label">The Solution</p>
+              <h2 className="sol-left__headline">
+                Why leading stores<br />choose Proof
+              </h2>
+              <p className="sol-left__sub">
+                We built a migration path built specifically for LiquorPOS<sup className="reg">®</sup> users —
+                zero downtime, all your data intact, and a team that actually picks up the phone.
+              </p>
+            </div>
+          </div>
 
-            </div>
- 
-            {/* Right 2×2 card grid */}
-            <div className="sol-cards">
-              {features.map((f, i) => (
-                <div key={i} className="sol-card">
-                  <div className="sol-card__icon">{f.icon}</div>
-                  <h3 className="sol-card__title">{f.title}</h3>
-                  <p className="sol-card__desc">{f.desc}</p>
-                </div>
-              ))}
-            </div>
+          <div className="sol-cards">
+            {features.map((f, i) => (
+              <div
+                key={i}
+                className={`sol-card rev${secVis ? " vis" : ""}`}
+                style={{ transitionDelay: secVis ? `${0.2 + i * 0.1}s` : "0s" }}
+              >
+                <div className="sol-card__icon">{f.icon}</div>
+                <h3 className="sol-card__title">{f.title}</h3>
+                <p className="sol-card__desc">{f.desc}</p>
+              </div>
+            ))}
           </div>
         </div>
       </div>
-    </section>
-  );
+    </div>
+  </section>
+);
 }
  
 
