@@ -1,5 +1,7 @@
 import { useState } from "react";
 import './contact.css';
+import mailFast from "./assets/mail-fast.png";
+
 const SHEET_URL =
   "https://script.google.com/macros/s/AKfycbwO7P1hqKxGFy-dRbnGtjtlRpnZ4p4qcr4Jb1ud0s26nnWXeMcn3_AG44Dy7SjBXQrbAA/exec";
 
@@ -104,15 +106,17 @@ export default function Contact() {
           <div className="contact-card">
             <h3 className="contact-card__title">Talk to a POS Specialist</h3>
 
-            {submitted ? (
-              <div className="contact-success">
-                <div className="contact-success__icon">✅</div>
-                <h4>You're All Set!</h4>
-                <p>
-                  A specialist will reach out within one business day via your
-                  preferred method.
-                </p>
-              </div>
+              {submitted ? (
+                <div className="contact-success">
+                  <div className="contact-success__icon">
+                    <img src={mailFast} alt="Message sent" className="contact-success__img" />
+                  </div>
+                  <h4>You're All Set!</h4>
+                  <p>
+                    A specialist will reach out within one business day via your
+                    preferred method.
+                  </p>
+                </div>
             ) : (
               <div className="contact-form">
                 {/* Name row */}

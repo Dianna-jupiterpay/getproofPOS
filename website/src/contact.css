@@ -348,3 +348,33 @@
     gap: 0.6rem;
   }
 }
+
+.contact-checklist__item {
+  display: flex;
+  align-items: center;  /* was flex-start */
+  gap: 0.75rem;
+  font-size: 0.9rem;
+  font-weight: 500;
+  color: var(--bg);
+  line-height: 1.5;
+}
+
+.contact-checklist__item svg {
+  flex-shrink: 0;
+  /* remove the margin-top: 1px that was pushing it down */
+}
+
+.contact-success__img {
+  width: 64px;
+  height: 64px;
+  object-fit: contain;
+  margin-bottom: 0.5rem;
+}
+
+.contact-success__icon {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-bottom: 0.75rem;
+  font-size: 2.5rem; /* fallback if image fails */
+}
