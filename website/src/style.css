@@ -339,7 +339,7 @@ em { font-style: italic; }
 
 .hero__sub {
   max-width: 800px;
-  margin: 2rem auto 2.5rem;
+  margin: 2rem auto 2rem;
   font-size: 1.02rem;
   line-height: 1.8;
   color: rgba(255, 255, 255, 0.62);
@@ -360,12 +360,24 @@ em { font-style: italic; }
   justify-content: center;
   align-items: center;
   margin-bottom: 2rem;
+  
+
+ 
+  width: fit-content;
+  margin-left: auto;
+  margin-right: auto;
 }
 
 .time-box {
   display: flex;
   flex-direction: column;
   align-items: center;
+    background: rgba(255, 255, 255, 0.08);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  border-radius: 16px;
+   padding: 1.25rem .75rem;
 }
 
 .time-box span {
