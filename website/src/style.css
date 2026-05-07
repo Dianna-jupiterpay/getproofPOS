@@ -791,7 +791,7 @@ em { font-style: italic; }
     cursor: auto;
   }
 }.nav__logo-img {
-  width: 200px;
+  width: 250px;
   height: auto;
   display: block;
   object-fit: contain;
