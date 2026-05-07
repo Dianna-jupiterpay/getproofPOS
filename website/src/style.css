@@ -727,18 +727,6 @@ em { font-style: italic; }
   letter-spacing: 0.04em;
 }
 
-/* ─── RESPONSIVE ─── */
-@media (max-width: 900px) {
-  .container { padding: 0 2rem; }
-  .nav { padding: 0 2rem; }
-  .nav__links { gap: 1.25rem; }
-  .section { padding: 4rem 0; }
-  .card-grid--3 { grid-template-columns: 1fr; }
-  .solution__grid { grid-template-columns: 1fr; gap: 3rem; }
-  .field-row { grid-template-columns: 1fr; }
-  .footer { flex-direction: column; gap: 0.75rem; padding: 1.5rem 2rem; text-align: center; }
-  .hero { padding: 7rem 1.5rem 9rem; }
-}
 
 
   .hero__headline{
@@ -757,39 +745,7 @@ em { font-style: italic; }
 
 }
 
-
-@media (max-width: 480px) {
-  .nav__link { display: none; }
-}
-
-.reg {
-  font-size: 1.2em;
-  vertical-align: super;
-  position: relative;
-  letter-spacing: 0;
-}
-
-@media (max-width: 800px) {
-  .hero__headline .reg {
-    font-size: 0.8em;
-    top: -0.22em;
-  }
-}
-
-@media (max-width: 768px) {
-  .cur-ring,
-  .cur-dot {
-    display: none;
-  }
-
-  body,
-  a,
-  button,
-  input,
-  select {
-    cursor: auto;
-  }
-}.nav__logo-img {
+.nav__logo-img {
   width: 250px;
   height: auto;
   display: block;
@@ -805,4 +761,85 @@ em { font-style: italic; }
 /* Stuck navbar */
 .nav--stuck .nav__logo-img {
   filter: none;
+}
+
+.footer {
+  background: var(--ink);
+  padding: 0.6rem 4rem;  /* was 2rem 4rem */
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+.footer .nav__logo-img {
+  width: 175px;
+}
+#problem,
+#solution {
+  scroll-margin-top: 24px;
+}
+
+/* ─── MOBILE FIXES ─── */
+@media (max-width: 768px) {
+
+  /* ── Hero headline: LiquorPOS line bigger, em line smaller ── */
+  .hero__headline {
+    font-size: clamp(2rem, 8vw, 3.2rem);
+  }
+
+  .hero__headline em {
+    font-size: 1.2rem;
+    letter-spacing: 0.05em;
+  }
+
+  /* ── Countdown: shrink numbers so they fit ── */
+  .countdown {
+    gap: 10px;
+  }
+
+  .time-box {
+    padding: 0.4rem 0.3rem;
+    border-radius: 10px;
+  }
+
+  .time-box span {
+    font-size: 1.4rem;
+    min-width: 36px;
+    padding: 4px 6px;
+  }
+
+  .time-box label {
+    font-size: 0.55rem;
+    letter-spacing: 0.5px;
+  }
+
+  /* ── Nav: pull logo left, fix CTA button ── */
+  .nav {
+    padding: 0 1rem;
+  }
+
+  .nav__logo {
+    margin-right: auto;
+  }
+
+  .nav__logo-img {
+    width: 130px;
+  }
+
+  .nav__cta {
+    white-space: nowrap;
+    padding: 0.55rem 1.5rem;
+    font-size: 0.75rem;
+  }
+
+  /* ── Problem headline: smaller font ── */
+  .prob-block__headline {
+    font-size: clamp(1.3rem, 5vw, 1.8rem);
+  }
+}
+
+@media (max-width: 768px) {
+  .nav__logo-img {
+    width: 130px;
+    margin-left: -12px; /* nudges logo further left by trimming SVG padding */
+  }
 }

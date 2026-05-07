@@ -247,7 +247,7 @@ export default function Contact() {
                   onClick={handleSubmit}
                   disabled={sending}
                 >
-                  {sending ? "Sending…" : "GET MY FREE TRANSITION PLAN"}
+                  {sending ? "Sending…" : "Contact US"}
                 </button>
 
                 <div className="cf-footer-badges">

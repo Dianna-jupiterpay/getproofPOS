@@ -204,11 +204,12 @@ function Ticker() {
     "Real Support Team",
     "Workflows Intact",
   ];
-  const doubled = [...items, ...items];
+  // Quadruple so the seam is never visible
+  const repeated = [...items, ...items, ...items, ...items];
   return (
     <div className="ticker">
       <div className="ticker__track">
-        {doubled.map((item, i) => (
+        {repeated.map((item, i) => (
           <span key={i} className="ticker__item">
             <span className="ticker__text">{item}</span>
             <span className="ticker__sep">◆</span>
@@ -376,8 +377,14 @@ function Footer() {
   return (
     <footer className="footer">
       <div className="footer__logo">
-        <BottleSVG stroke="rgba(255, 255, 255, 0.7)" width={18} />
-        <span className="footer__logo-text">proof</span>
+      <a href="#" className="nav__logo">
+     
+             <img
+          src={FinalLogo}
+          alt="Proof"
+          className="nav__logo-img"
+        />
+           </a>
       </div>
       <span className="footer__copy">© 2026 Proof POS. All rights reserved.</span>
     </footer>
