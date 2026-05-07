@@ -299,26 +299,6 @@
   line-height: 1.7;
 }
 
-/* ─── RESPONSIVE ─── */
-@media (max-width: 900px) {
-  .contact-section {
-    padding: 4rem 2rem;
-  }
-
-  .contact-inner {
-    grid-template-columns: 1fr;
-    gap: 3rem;
-  }
-
-  .cf-row {
-    grid-template-columns: 1fr;
-  }
-
-  .cf-footer-badges {
-    flex-direction: column;
-    gap: 0.6rem;
-  }
-}
 
 .contact-section {
   background: var(--navy);
@@ -345,4 +325,26 @@
 .contact-inner {
   position: relative;
   z-index: 1;
+}
+
+
+/* ─── RESPONSIVE ─── */
+@media (max-width: 900px) {
+  .contact-section {
+    padding: 4rem 2rem;
+  }
+
+  .contact-inner {
+    grid-template-columns: 1fr;
+    gap: 3rem;
+  }
+
+  .cf-row {
+    grid-template-columns: 1fr;
+  }
+
+  .cf-footer-badges {
+    flex-direction: column;
+    gap: 0.6rem;
+  }
 }

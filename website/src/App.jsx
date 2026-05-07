@@ -6,9 +6,8 @@ import cancel from "./assets/cancel.png";
 import warning from "./assets/warning.png";
 import block from "./assets/block.png";
 import "./problem.css";
+import FinalLogo from "./assets/Final.svg";
 
-
-import './problem.css';
 const CancelIcon = () => (
   <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#c0392b" strokeWidth="2">
     <circle cx="12" cy="12" r="10"/>
@@ -16,6 +15,48 @@ const CancelIcon = () => (
     <line x1="9" y1="9" x2="15" y2="15"/>
   </svg>
 );
+
+const ProofLogo = ({ color = "#002c65", width = 140 }) => (
+  <svg
+    viewBox="0 0 1100 220"
+    xmlns="http://www.w3.org/2000/svg"
+    style={{ width, height: "auto" }}
+  >
+    {/* Bottle */}
+    <g transform="translate(0,10)">
+      <path
+        d="M38 8v38c0 5-2 10-5 14l-7 8c-2 2-3 5-3 8v113c0 4 3 7 7 7h40c4 0 7-3 7-7V76c0-3-1-6-3-8l-7-8c-3-4-5-9-5-14V8"
+        fill="none"
+        stroke={color}
+        strokeWidth="6"
+        strokeLinejoin="round"
+      />
+      <line
+        x1="34"
+        y1="8"
+        x2="66"
+        y2="8"
+        stroke={color}
+        strokeWidth="6"
+        strokeLinecap="round"
+      />
+    </g>
+
+    {/* proof text */}
+    <text
+      x="115"
+      y="155"
+      fontFamily="Inter, Helvetica, Arial, sans-serif"
+      fontSize="145"
+      fontWeight="700"
+      fill={color}
+      letterSpacing="-6"
+    >
+      proof
+    </text>
+  </svg>
+);
+
 
 const WarningIcon = () => (
   <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#c8820a" strokeWidth="2">
@@ -84,9 +125,13 @@ function Nav() {
   return (
     <nav className={`nav${stuck ? " nav--stuck" : ""}`}>
       <a href="#" className="nav__logo">
-        <BottleSVG stroke={stuck ? "#1b2d5b" : "#ffffff"} width={22} />
-        <span className="nav__logo-text">proof</span>
-      </a>
+     
+             <img
+          src={FinalLogo}
+          alt="Proof"
+          className="nav__logo-img"
+        />
+           </a>
 
       <div className="nav__links">
         <a href="#problem" className="nav__link">The Problem</a>
@@ -96,7 +141,6 @@ function Nav() {
     </nav>
   );
 }
-
 /* ─── HERO ─── */
 function Hero({ loaded }) {
   return (
@@ -118,7 +162,7 @@ function Hero({ loaded }) {
               className={`wm-inner${loaded ? " loaded" : ""}`}
               style={{ transitionDelay: "0.2s" }}
             >
-              LiquorPOS® <br />
+              LiquorPOS<sup className="reg" style={{ fontSize: '0.7em', fontWeight: 8 }}>®</sup> <br />
               End of Life is Coming.  
             </span>
           </span>
@@ -183,13 +227,26 @@ function Problem() {
     {
       icon: <img src={cancel} alt="" width={28} height={28} />,
       title: "No new registers or locations",
-      desc: "LiquorPOS ® ceased selling new licenses effective May 1st, 2026. Every opportunity to grow is now blocked by your own software.",
+      desc: (
+  <>
+    LiquorPOS
+    <sup className="reg reg--desc">®</sup>
+    {" "}ceased selling new licenses effective May 1st, 2026.
+    Every opportunity to grow is now blocked by your own software.
+  </>
+),
     },
     {
       icon: <img src={warning} alt="" width={28} height={28} />,
       title: "Support is winding down",
-      desc: "LiquorPOS® support ends May 1st, 2027 — leaving you with no way to troubleshoot issues or keep your business running.",
-    },
+    desc: (
+  <>
+    LiquorPOS
+    <sup className="reg reg--desc">®</sup>
+    {" "}support ends May 1st, 2027 — leaving you with no way
+    to troubleshoot issues or keep your business running.
+  </>
+),    },
     {
       icon: <img src={block} alt="" width={28} height={28} />,
       title: "No upgrade path",
@@ -209,7 +266,7 @@ function Problem() {
           <div className="prob-block__header">
             <p className="section__label">The Situation</p>
             <h2 className="prob-block__headline">
-              Many LiquorPOS® users<br />are facing this right now.
+              Many LiquorPOS<sup className="reg" style={{ fontSize: '0.6em' }}>®</sup>  users<br />are facing this right now.
             </h2>
           </div>
  
@@ -231,56 +288,6 @@ function Problem() {
 }
 
 
-/* ─── SOLUTION ─── */
-// function Solution() {
-//   const [labelRef, labelVis] = useReveal();
-//   const [headRef, headVis] = useReveal();
-//   const [mockRef, mockVis] = useReveal();
-
-//   const features = [
-//     { n: "01", title: "Seamless transition from your current POS", desc: "We map your existing setup and handle the migration end-to-end. Your staff keeps working during the switch." },
-//     { n: "02", title: "Preserve your data, inventory & workflows", desc: "Every product, every price, ALL sales history. Nothing gets lost in translation." },
-//     { n: "03", title: "Add registers, locations & features anytime", desc: "Expand when you're ready — not when your software allows. Scale on your terms." },
-//     { n: "04", title: "Ongoing support from a real team", desc: "Not a chatbot. Not a ticket queue. Real people who understand liquor store operations." },
-//   ];
-
-//   return (
-//     <section id="solution" className="section section--alt">
-//       <div className="container">
-//         <p ref={labelRef} className={`section__label rev${labelVis ? " vis" : ""}`}>
-//           The Solution
-//         </p>
-//         <h2 ref={headRef} className={`section__headline rev${headVis ? " vis" : ""}`}>
-//           We built this<br />for stores <em>like yours.</em>
-//         </h2>
-
-//         <div className="solution__grid">
-//           <div className="solution__features">
-//             {features.map((f, i) => {
-//               const [ref, vis] = useReveal();
-//               return (
-//                 <div
-//                   key={i}
-//                   ref={ref}
-//                   className={`feature-row slide-left${vis ? " vis" : ""}${i === 0 ? " feature-row--first" : ""}`}
-//                   style={{ transitionDelay: `${i * 0.1}s` }}
-//                 >
-//                   <span className="feature-row__num">{f.n}</span>
-//                   <div>
-//                     <h3 className="feature-row__title">{f.title}</h3>
-//                     <p className="feature-row__desc">{f.desc}</p>
-//                   </div>
-//                 </div>
-//               );
-//             })}
-//           </div>
-
-
-//         </div>
-//       </div>
-//     </section>
-//   );
-// }
 function Solution() {
   const [secRef, secVis] = useReveal();
  
@@ -339,7 +346,7 @@ function Solution() {
                   Why leading stores<br />choose Proof
                 </h2>
                 <p className="sol-left__sub">
-                  We built a migration path built specifically for LiquorPOS® users —
+                  We built a migration path built specifically for LiquorPOS<sup className="reg">®</sup> users —
                   zero downtime, all your data intact, and a team that actually picks up the phone.
                 </p>
               </div>

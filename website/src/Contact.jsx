@@ -71,7 +71,7 @@ export default function Contact() {
           <ul className="contact-checklist">
             <li className="contact-checklist__item">
               <CheckIcon />
-              <span>Continue to receive live support for both LiquorPOS and Proof</span>
+              <span>Continue to receive live support for both LiquorPOS<sup className="reg">®</sup>   and Proof</span>
             </li>
             <li className="contact-checklist__item">
               <CheckIcon />

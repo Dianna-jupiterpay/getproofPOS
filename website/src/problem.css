@@ -21,13 +21,18 @@
 }
 
 .prob-block__headline {
-  font-size: clamp(2rem, 4vw, 3.2rem);
+  font-size: clamp(3rem, 4vw, 3.2rem);
   line-height: 1.1;
   letter-spacing: -0.025em;
   color: var(--ink);
   margin-top: 0.5rem;
 }
 
+@media (max-width:800px) {
+  .prob-block__headline {
+    font-size: clamp(2.5rem, 4vw, 2.8rem);  
+}
+}
 .prob-grid {
   border: 1px solid rgba(0, 0, 0, 0.08);
   border-radius: 12px;
@@ -55,7 +60,7 @@
 /* ─── HOVER: background ─── */
 .prob-text-cell:hover {
   background: rgba(27, 45, 91, 0.02);
-    border-radius: 12px;
+  border-radius: 12px;
   box-shadow:
     0 -6px 20px -4px rgba(47, 128, 237, 0.18),
     0  6px 20px -4px rgba(0, 168, 204, 0.14);
@@ -63,7 +68,7 @@
 
 /* ─── First card: left edge exposed ─── */
 .prob-text-cell:first-child:hover {
-    border-radius: 12px;
+  border-radius: 12px;
   box-shadow:
     -6px  0   20px -4px rgba(47, 128, 237, 0.18),
      0   -6px 20px -4px rgba(47, 128, 237, 0.18),
@@ -97,7 +102,7 @@
 
 /* ─── TYPOGRAPHY ─── */
 .prob-text-cell__title {
-  font-size: 0.95rem;
+  font-size: 1rem;
   font-weight: 600;
   color: var(--ink);
   margin-bottom: 0.5rem;
@@ -105,7 +110,7 @@
 }
 
 .prob-text-cell__desc {
-  font-size: 0.82rem;
+  font-size: 0.95rem;
   line-height: 1.7;
   color: var(--ink2);
 }

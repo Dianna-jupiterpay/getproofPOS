@@ -2,7 +2,7 @@ import { useState, useEffect } from "react";
 import "./style.css";
 
 export default function Countdown() {
-  const TARGET = new Date("2027-05-30T00:00:00");
+  const TARGET = new Date("2027-04-30T23:59:59");
 
   const calcTime = () => {
     const diff = TARGET - Date.now();
